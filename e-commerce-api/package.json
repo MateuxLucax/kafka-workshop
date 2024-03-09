@@ -1,0 +1,17 @@
+{
+  "name": "e-commerce-api",
+  "module": "src/index.js",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts"
+  },
+  "dependencies": {
+    "@types/uuid": "^9.0.8",
+    "elysia": "latest",
+    "kafkajs": "^2.2.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}

@@ -1,0 +1,49 @@
+include: 
+  - kafka/docker-compose.yml
+
+services:
+  e-commerce-api:
+    container_name: e-commerce-api
+    build:
+      context: ./e-commerce-api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - init-kafka
+
+  approve-payment01: &approve-payment
+    container_name: approve-payment01
+    build:
+      context: ./approve-payment
+      dockerfile: Dockerfile
+    depends_on:
+      - init-kafka
+
+  approve-payment02:
+    <<: *approve-payment
+    container_name: approve-payment02
+
+  generate-invoice01: &generate-invoice
+    container_name: generate-invoice01
+    build:
+      context: ./generate-invoice
+      dockerfile: Dockerfile
+    depends_on:
+      - init-kafka
+
+  generate-invoice02:
+    <<: *generate-invoice
+    container_name: generate-invoice02
+
+  notify-users01: &notify-users
+    container_name: notify-users01
+    build:
+      context: ./notify-users
+      dockerfile: Dockerfile
+    depends_on:
+      - init-kafka
+
+  notify-users02:
+    <<: *notify-users
+    container_name: notify-users02
