@@ -1,4 +1,6 @@
-include: 
+version: "3.5"
+
+include:
   - kafka/docker-compose.yml
 
 services:
@@ -8,9 +10,12 @@ services:
       context: ./e-commerce-api
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "9999:8080"
     depends_on:
-      - init-kafka
+      init-kafka:
+        condition: service_healthy
+    networks:
+      - kafka-workshop
 
   approve-payment01: &approve-payment
     container_name: approve-payment01
@@ -18,11 +23,14 @@ services:
       context: ./approve-payment
       dockerfile: Dockerfile
     depends_on:
-      - init-kafka
+      init-kafka:
+        condition: service_healthy
+    networks:
+      - kafka-workshop
 
-  approve-payment02:
-    <<: *approve-payment
-    container_name: approve-payment02
+  # approve-payment02:
+  #   <<: *approve-payment
+  #   container_name: approve-payment02
 
   generate-invoice01: &generate-invoice
     container_name: generate-invoice01
@@ -30,11 +38,14 @@ services:
       context: ./generate-invoice
       dockerfile: Dockerfile
     depends_on:
-      - init-kafka
+      init-kafka:
+        condition: service_healthy
+    networks:
+      - kafka-workshop
 
-  generate-invoice02:
-    <<: *generate-invoice
-    container_name: generate-invoice02
+  # generate-invoice02:
+  #   <<: *generate-invoice
+  #   container_name: generate-invoice02
 
   notify-users01: &notify-users
     container_name: notify-users01
@@ -42,8 +53,11 @@ services:
       context: ./notify-users
       dockerfile: Dockerfile
     depends_on:
-      - init-kafka
+      init-kafka:
+        condition: service_healthy
+    networks:
+      - kafka-workshop
 
-  notify-users02:
-    <<: *notify-users
-    container_name: notify-users02
+  # notify-users02:
+  #   <<: *notify-users
+  #   container_name: notify-users02
