@@ -28,9 +28,9 @@ services:
     networks:
       - kafka-workshop
 
-  # approve-payment02:
-  #   <<: *approve-payment
-  #   container_name: approve-payment02
+  approve-payment02:
+    <<: *approve-payment
+    container_name: approve-payment02
 
   generate-invoice01: &generate-invoice
     container_name: generate-invoice01
@@ -43,9 +43,9 @@ services:
     networks:
       - kafka-workshop
 
-  # generate-invoice02:
-  #   <<: *generate-invoice
-  #   container_name: generate-invoice02
+  generate-invoice02:
+    <<: *generate-invoice
+    container_name: generate-invoice02
 
   notify-users01: &notify-users
     container_name: notify-users01
@@ -58,6 +58,6 @@ services:
     networks:
       - kafka-workshop
 
-  # notify-users02:
-  #   <<: *notify-users
-  #   container_name: notify-users02
+  notify-users02:
+    <<: *notify-users
+    container_name: notify-users02

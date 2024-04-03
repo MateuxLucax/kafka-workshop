@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia'
-import { CompressionTypes, ITopicConfig, Kafka } from 'kafkajs'
+import { CompressionTypes, Kafka } from 'kafkajs'
 import { v4 as uuidv4 } from 'uuid'
 import { PurchasePayload } from './types'
 
